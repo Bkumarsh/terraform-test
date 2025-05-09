@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "azure_rg" {
 
 resource "azurerm_storage_account" "abc_storage" {
   for_each = toset(var.resource_group_name)
-  name     = "storageaccount${each.value}"
+  name     = "devkastorageaccount${each.value}"
   location = azurerm_resource_group.azure_rg[each.key].location
   resource_group_name = azurerm_resource_group.azure_rg[each.key].name
   account_tier = "Standard"
