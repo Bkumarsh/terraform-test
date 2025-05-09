@@ -10,10 +10,12 @@ resource "azurerm_resource_group" "azure_rg" {
   location = "East US"
 }
 
-resource "azurerm_storage_account" "azure_sgc" {
-  name                     = "dhondhustorageaccount"
-  resource_group_name      = azurerm_resource_group.azure_rg[0].name
-  location                 = azurerm_resource_group.azure_rg.location
-  account_tier             = "Standard"
+resource "azurerm_storage_account" "abc_storage" {
+  for_each = toset(var.resource_group_name)
+  name     = "storageaccount${each.value}"
+  location = azurerm_resource_group.azure_rg[each.key].location
+  resource_group_name = azurerm_resource_group.azure_rg[each.key].name
+  account_tier = "Standard"
   account_replication_type = "LRS"
+  
 }
