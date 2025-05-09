@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "azure_rg" {
 
 resource "azurerm_storage_account" "azure_sgc" {
   name                     = "dhondhustorageaccount"
-  resource_group_name      = azurerm_resource_group.azure_rg.name
+  resource_group_name      = azurerm_resource_group.azure_rg[0].name
   location                 = azurerm_resource_group.azure_rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
